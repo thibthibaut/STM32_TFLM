@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.15.3)
 
+set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/cmake/arm-none-eabi-gcc.cmake)
+
 # This is your project statement. You should always list languages; Listing the
 # version is nice here since it sets lots of useful variables
 project(
