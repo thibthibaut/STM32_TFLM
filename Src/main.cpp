@@ -71,6 +71,7 @@ int main(void)
   UTIL_LCD_SetFuncDriver(&LCD_Driver);
   UTIL_LCD_SetFont(&UTIL_LCD_DEFAULT_FONT);
   Display_DemoDescription();
+  Camera_demo();
   /* Wait For User inputs */
   while (1)
   {

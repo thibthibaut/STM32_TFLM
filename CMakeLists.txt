@@ -72,15 +72,9 @@ set(DRIVERS
 )
 
 set(APP
-  Src/camera.c
-  Src/joystick.c
-  Src/lcd.c
-  Src/main.c
-  Src/qspi.c
-  Src/sd.c
-  Src/sdram.c
+  Src/main.cpp
+  Src/camera.cpp
   Src/stm32h7xx_it.c
-  Src/touchscreen.c
   startup_stm32h747xx.s
   Utilities/lcd/stm32_lcd.c
   Src/system_stm32h7xx.c
@@ -127,7 +121,12 @@ target_compile_options(
     -ffunction-sections
     -Wall
     -Wextra
+    -ffreestanding
     -fno-strict-aliasing
+    -fno-exceptions
+    -fno-non-call-exceptions
+    -fno-common
+    -fno-rtti
     $<$<CONFIG:Debug>:-O0>
 )
 
