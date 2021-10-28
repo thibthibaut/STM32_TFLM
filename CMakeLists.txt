@@ -73,7 +73,6 @@ set(DRIVERS
 
 set(APP
   Src/main.cpp
-  Src/camera.cpp
   Src/stm32h7xx_it.c
   startup_stm32h747xx.s
   Utilities/lcd/stm32_lcd.c
@@ -126,7 +125,7 @@ target_compile_options(
     -fno-exceptions
     -fno-non-call-exceptions
     -fno-common
-    -fno-rtti
+    $<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>
     $<$<CONFIG:Debug>:-O0>
 )
 
