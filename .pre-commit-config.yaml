@@ -1,7 +1,7 @@
 # See https://pre-commit.com/hooks.html for more hooks
 
 # Don't run pre-commit on files under third-party/
-exclude: "^.*\\.svd"
+exclude: "^.*Middlewares.*"
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks

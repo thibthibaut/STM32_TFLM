@@ -15,64 +15,12 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# Drivers & BSPs
-set(DRIVERS
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc_ex.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_cortex.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dcmi.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dfsdm.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma2d.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma_ex.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dsi.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_flash.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_flash_ex.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_gpio.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_exti.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_hsem.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c_ex.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_ltdc.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_ltdc_ex.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mdma.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_nor.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_qspi.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc_ex.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sai.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sai_ex.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd_ex.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sdram.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim_ex.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart_ex.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_fmc.c
-  Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_sdmmc.c
-  Drivers/BSP/Components/is42s32800j/is42s32800j.c
-  Drivers/BSP/Components/otm8009a/otm8009a.c
-  Drivers/BSP/Components/otm8009a/otm8009a_reg.c
-  Drivers/BSP/Components/ov9655/ov9655.c
-  Drivers/BSP/Components/ov9655/ov9655_reg.c
-  Drivers/BSP/Components/ov5640/ov5640.c
-  Drivers/BSP/Components/ov5640/ov5640_reg.c
-  Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery.c
-  Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_bus.c
-  Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_camera.c
-  Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_lcd.c
-  Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_qspi.c
-  Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c
-  Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sdram.c
-  Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_ts.c
-)
+add_subdirectory(Middlewares/Third_Party/tflite-micro/)
+add_subdirectory(Drivers)
 
 set(APP
   Src/main.cpp
+  Src/board.cpp
   Src/stm32h7xx_it.c
   startup_stm32h747xx.s
   Utilities/lcd/stm32_lcd.c
@@ -93,6 +41,17 @@ target_compile_definitions(
   -DUSE_STM32H747I_DISCO
   -DCORE_CM7
   -DTS_MULTI_TOUCH_SUPPORTED
+)
+
+include_directories(
+  Middlewares/Third_Party/tflite-micro/third_party/flatbuffers/include/
+  Middlewares/Third_Party/tflite-micro
+  Middlewares/Third_Party/third_party/gemmlowp/
+  Middlewares/Third_Party/third_party/ruy/
+  Middlewares/Third_Party/third_party/cmsis/
+  Middlewares/Third_Party/third_party/cmsis/CMSIS/NN/Include
+  Middlewares/Third_Party/third_party/cmsis/CMSIS/DSP/Include
+  Middlewares/Third_Party/third_party/cmsis/CMSIS/Core/Include
 )
 
 target_include_directories(
@@ -127,6 +86,7 @@ target_compile_options(
     -fno-common
     $<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>
     $<$<CONFIG:Debug>:-O0>
+    $<$<CONFIG:Release>:-O3>
 )
 
 target_link_options(
@@ -146,6 +106,10 @@ target_link_options(
   -T${CMAKE_SOURCE_DIR}/STM32H747XIHx_FLASH_CM7.ld
 )
 
+target_link_libraries(
+  ${PROJECT_NAME}
+  tflm)
+
 # Print executable size
 add_custom_command(
   TARGET ${PROJECT_NAME}
@@ -158,8 +122,3 @@ add_custom_command(
   POST_BUILD
   COMMAND arm-none-eabi-objcopy -O ihex ${PROJECT_NAME} ${PROJECT_NAME}.hex
   COMMAND arm-none-eabi-objcopy -O binary ${PROJECT_NAME} ${PROJECT_NAME}.bin)
-
-# Uncomment to link with a library
-#target_link_libraries(
-#  ${PROJECT_NAME}
-# Add lib here )
